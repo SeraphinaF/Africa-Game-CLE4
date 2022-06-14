@@ -47,7 +47,8 @@ class Game {
     playerInput = []
     level = 0
 // DEZE MOET WERKEN !!
-// new !!
+// new !!!
+
  
     constructor() {
         //  ipad resolutie 
