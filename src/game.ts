@@ -43,11 +43,10 @@ class Game {
     background = backgroundImage
        // game variables
     startButton = document.getElementById('start')
-    sequence = []
+    newSequence : PIXI.Sprite [] = []
+    sequence : PIXI.Sprite[] = []
     playerInput = []
     level = 0
-
-//test
  
     constructor() {
         //  ipad resolutie 
@@ -110,8 +109,11 @@ class Game {
         this.Rect4 = new GameCard4(this.loader.resources["rect4Texture"].texture! ,this.loader.resources["djembe4Audio"].data!)
         this.pixi.stage.addChild(this.Rect4)
 
+        this.sequence = [this.Rect1, this.Rect2, this.Rect3, this.Rect4];
+
         this.pixi.ticker.add((delta) => this.updateTheStage(delta))
     } 
+    
 
     playAudio(){
         //adding background audio
@@ -126,27 +128,26 @@ class Game {
         this.wolk3.update(delta)
     }
     
+    activateTile(){
+        this.cardClicked()
+    }
+
+    cardClicked() {
+        console.log("you clicked a card")
+    }
+
     nextStep(){
-        const tiles = [GameCard1, GameCard2, GameCard3, GameCard4 ]
-        const random = tiles[Math.floor(Math.random() * tiles.length)];
+        //add new tile to sequence + new level
+        this.newSequence.push(this.sequence[Math.floor(Math.random() * this.sequence.length)]);
+        console.log(this.sequence)
 
-        // console.log(tiles)
-        console.log(tiles)
-
-        return random;
-        
-    }
-
-    nextRound(){
         this.level += 1
-
-        const nextSequence = [...this.sequence]
-        nextSequence.push(nextStep) 
-    }
-
+    } 
+    
     startGame(){
         console.log("start game")
         this.startButton?.classList.add('hidden')
+        // this.playStep()
     }
 }
 

@@ -18,7 +18,7 @@ export class GameCard3 extends PIXI.Sprite{
         this.on('pointerup', () => this.cardOnClicked())
     }
 
-    cardClicked(){
+    public cardClicked(){
         this.djembeAudio.play()
         this.scale.set(0.32)
         // MISSCHIEN PUBLIC IN GAME.ts?

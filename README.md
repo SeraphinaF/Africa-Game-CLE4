@@ -1,2 +1,3 @@
-GEMS of Africa 
+# GEMS of Africa 
 
+Cleanup repository
