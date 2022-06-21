@@ -1,2 +1,0 @@
-GEMS of Africa 
-
