@@ -16,7 +16,7 @@ import soundDjembe2 from    "url:./audio/djembe2.wav"
 import soundDjembe3 from    "url:./audio/djembe3.wav"
 import soundDjembe4 from    "url:./audio/djembe4.wav"
 
-import startButton from "./as(18).png"
+import startButtonImage from "./images/startbutton.png"
 
 import { GAMECARD } from    "./gameCard"
 import { WOLKEN } from      "./wolk"
@@ -44,7 +44,7 @@ class Game {
         // background variable 
     background = backgroundImage
        // game variables
-    startButton = startButton
+    startButton : PIXI.Sprite
     sequence = []
     playerInput = []
     level = 0
@@ -77,9 +77,9 @@ class Game {
             .add('djembe2Audio', soundDjembe2)
             .add('djembe3Audio', soundDjembe3)
             .add('djembe4Audio', soundDjembe4)
-            .add('startButtontexture', startButton)
+            .add('startButtontexture', startButtonImage)
         this.loader.load(() => this.doneLoading())
-        this.loader.load(()=> this.playAudio())
+       
     }
 
     doneLoading() {
@@ -104,6 +104,9 @@ class Game {
         //add starting button
         this.startButton = new PIXI.Sprite(this.loader.resources["startButtontexture"].texture!)
         this.pixi.stage.addChild(this.startButton)
+        this.startButton.buttonMode = true
+        this.startButton.interactive = true
+        this.startButton.on('pointerdown', () => this.startButtonWasClicked())
 
         //add rectangles to screen
         this.Rect1 = new GameCard1(this.loader.resources["rect1Texture"].texture!, this.loader.resources["djembe1Audio"].data!)
@@ -120,6 +123,11 @@ class Game {
 
         this.pixi.ticker.add((delta) => this.updateTheStage(delta))
     } 
+
+    startButtonWasClicked(){
+        console.log("je klikte op de knop" )
+        this.playAudio()
+    }
 
     playAudio(){
         //adding background audio
